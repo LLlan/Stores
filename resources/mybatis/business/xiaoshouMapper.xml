@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xiaoshouMapper">
+		
+		 
+	<select id="xiaoshoulistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					ts.xiaoshou_id,
+					ts.gkmc_id,
+					ts.xiaoshou_time,
+					ts.all_totol,
+					ts.jbr,
+					ts.remark,
+					tk.kehu_name
+				from tb_xiaoshou ts
+				left join tb_kehu  tk on tk.kehu_id = ts.gkmc_id
+				order by xiaoshou_time desc
+	</select>
+	
+	<!-- 销售单详情页数据 -->
+	<select id="xiaoshouGoodsDetail" parameterType="pd" resultType="pd">
+				select 
+					ts.xiaoshou_id,
+					ts.gkmc_id,
+					tg.goods_name,
+					txg.ggxh,
+					txg.spmc_id,
+					txg.jianshu,
+					txg.danjia,
+					txg.money
+				from tb_xiaoshou ts
+				left join tb_kehu  tk on tk.kehu_id = ts.gkmc_id
+				left join tb_xiaoshou_goods txg on txg.xiaoshou_id = ts.xiaoshou_id
+				left join tb_goods tg on tg.goods_id = txg.spmc_id
+				where ts.xiaoshou_id = #{xiaoshou_id}
+	</select>
+	
+	<select id="xiaoshouDetail" parameterType="pd" resultType="pd">
+				select 
+					ts.xiaoshou_id,
+					ts.gkmc_id,
+					ts.xiaoshou_time,
+					ts.all_totol,
+					ts.all_totol_dx,
+					ts.jbr,
+					ts.remark,
+					tk.kehu_name
+				from tb_xiaoshou ts
+				left join tb_kehu  tk on tk.kehu_id = ts.gkmc_id
+				where ts.xiaoshou_id = #{xiaoshou_id}
+	</select>
+	
+	<insert id="saveXiaoShouGoods" parameterType="pd">
+			insert into tb_xiaoshou_goods(
+					 xiaoshou_goods_id,
+				     xiaoshou_id,
+					 spmc_id,
+					 ggxh,
+					 jianshu,
+					 danjia,
+					 money,
+					 money_dx
+			)values(
+					#{xiaoshou_goods_id},
+					#{xiaoshou_id},
+					#{spmc_id},
+					#{ggxh},
+					#{jianshu},
+					#{danjia},
+					#{money},
+					#{money_dx}
+			)
+	</insert>
+	
+	<insert id="saveXiaoShou" parameterType="pd">
+			insert into tb_xiaoshou(
+				xiaoshou_id,
+				gkmc_id,
+				xiaoshou_time,
+				all_totol,
+				all_totol_dx,
+				jbr,
+				remark
+			)values(
+				#{xiaoshou_id},
+				#{gkmc_id},
+				#{xiaoshou_time},
+				#{all_totol},
+				#{all_totol_dx},
+				#{jbr},
+				#{remark}
+			)
+	</insert>
+	
+	<update id="updateJinhuo" parameterType="pd">
+		update tb_jinhuo
+			set 
+				     spmc_id  = #{spmc_id},
+					 ggxh = #{ggxh},
+					 danwei = #{danwei},
+					 danjia = #{danjia},
+					 shuliang = #{shuliang},
+					 money = #{money},
+					 money_dx = #{money_dx},
+					 remark = #{remark},
+					 caozuoyuan=#{caozuoyuan}
+			where sp_id = #{sp_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+				     sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 goods_name
+		     from tb_jinhuo 
+		     left join tb_goods on goods_id = spmc_id
+		     where sp_id =#{sp_id}
+	</select>
+	
+	<delete id="deleteXiaoshou" parameterType="pd">
+		delete from tb_xiaoshou where xiaoshou_id = #{xiaoshou_id}
+	</delete>
+	
+	<delete id="deleteXiaoshouGoods" parameterType="pd">
+		delete from tb_xiaoshou_goods where xiaoshou_id = #{xiaoshou_id}
+	</delete>
+	
+	<select id="getDataToView" parameterType="pd" resultType="pd">
+			select 
+				     sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 goods_name
+		     from tb_jinhuo 
+		     left join tb_goods on goods_id = spmc_id
+		     where sp_id =#{sp_id}
+	
+	</select>
+		
+</mapper>

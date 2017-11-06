@@ -1,0 +1,112 @@
+/* CSS Document */
+html{ height:100%;overflow: hidden;} /* IE7，Opera设置此属性 */
+body{ height:100%;} /* 谷歌只要设置body的height为100%就可以实现 */
+* {
+margin:0;
+padding:0;
+}
+a{color:#666;}
+a:hover, a:focus {
+ text-decoration: none; color:#28b779;
+}
+
+hr{ border-top-color:#dadada;}
+
+
+body{
+	overflow: hidden;
+	padding: 0;
+	margin-top:0px;
+	margin: 0px;
+	background-attachment:fixed;
+	background-size:100% 100%;
+	background-image: url("images/store_login.jpg");
+	background-repeat: no-repeat;
+	
+}
+
+.waiceng{
+	width:100%;
+	height: 100%;
+}
+	    
+#loginbox {
+		overflow: hidden;
+	    width: 100%;
+	    height: 100%;
+	    margin-left: auto;
+	    margin-right: auto;
+	    background-color: red;
+	    
+}
+
+/*<1360*/
+/* @media only screen and (max-width: 1360px){ 
+	.login_form{
+			 position:fixed;
+			 width:370px; 
+			 height: 325px; 
+			 margin-top:220px;
+			 margin-left:600px;
+			 border-radius:15px;
+			 background-color:#EDEDED; 
+		} 
+} */
+
+
+.login_form{
+	 position:fixed;
+	 width:370px; 
+	 height: 305px; 
+	 margin-top:190px;
+	 margin-left:690px;
+	 border-radius:15px;
+	 background-color:#EDEDED; 
+}
+
+	
+	
+.btn-login{
+	width: 100px;
+	height:20px;
+	background-color: #146ABD;
+	color: white;
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-family:YouYuan;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+#loginbox .form-actions { padding: 14px 20px 15px;}
+#loginbox .form-actions .pull-left { margin-top:0px;}
+#loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;}
+#loginbox .main_input_box .add-on{  padding:8px 8px; *line-height:31px; color:#fff;  width:30px; display:inline-block;}
+#loginbox .main_input_box input{ height:28px; border:0px; display:inline-block; width:75%; line-height:28px;  margin-bottom:3px;}
+#loginbox .controls{ padding:0 20px;}
+#loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
+.form-vertical, .form-actions {
+	margin-bottom: 0;
+	background:none;
+}
+
+
+#loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px;  color:#fff;}
+.copyRight{
+	text-align: center;
+}
+/* @media (max-width:1920px){
+#loginbox{ width:100%}
+}
+@media (max-width: 1366px){
+#loginbox{ width:100%}		 */
+
+#loginbox .control-group{ 
+	padding:8px 0;
+	margin-bottom:0px;
+}

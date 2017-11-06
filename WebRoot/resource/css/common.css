@@ -1,0 +1,50 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family:"Microsoft Yahei";
+}
+img{ border-style:none; }
+p,div,li,a{
+	font-size: 14px;
+}
+iframe{
+	padding: 0;
+	margin: 0;
+	position: absolute;
+}
+a{
+	text-decoration: none;
+}
+p{
+	display: inline-block;
+}
+ul li{
+	list-style: none;
+}
+h1,h2,h3,h4{
+	font-weight: normal;
+	display: inline-block;
+}
+iframe{
+	width: 100%;
+	min-width: 1150px;
+	border:none;
+	height: 1000px;
+}
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}

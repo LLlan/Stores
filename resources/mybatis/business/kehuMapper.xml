@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kehuMapper">
+		
+	<select id="kehulistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					kehu_id,
+					kehu_name,
+					address,
+					contact
+				 from tb_kehu
+				 where 1=1
+				<if test="pd.searchName!=null and pd.searchName!=''">
+				and
+				(
+					 kehu_name LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 address LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 contact LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+				)
+			</if>
+	</select> 
+	
+	<insert id="saveKehu" parameterType="pd">
+			insert into tb_kehu(
+					kehu_id,
+					kehu_name,
+					address,
+					contact
+			)values(
+				#{kehu_id},
+				#{kehu_name},
+				#{address},
+				#{contact}
+			)
+	</insert>
+	
+	<update id="updateKehu" parameterType="pd">
+		update tb_kehu
+			set 
+					kehu_name =#{kehu_name},
+					address=#{address},
+					contact=#{contact}
+		where kehu_id = #{kehu_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+					kehu_id,
+					kehu_name,
+					address,
+					contact
+		     from tb_kehu 
+		     where kehu_id = #{kehu_id}
+	</select>
+	
+	
+	<delete id="deleteKehu" parameterType="pd">
+		delete from tb_kehu   where kehu_id = #{kehu_id}
+	</delete>
+		
+</mapper>

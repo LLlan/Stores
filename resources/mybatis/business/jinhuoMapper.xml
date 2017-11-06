@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jinhuoMapper">
+		
+		 
+	<select id="jinhuolistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					 sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 jinhuo_time,
+					 goods_name
+				from tb_jinhuo
+				left join tb_goods on goods_id = spmc_id
+				where 1=1
+				<if test="pd.searchName!=null and pd.searchName!=''">
+					and
+				(
+					 goods_name LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 ggxh  LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 money LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 remark LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 caozuoyuan LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+					 or
+					 danjia LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+				)
+				</if>
+				order by  jinhuo_time desc
+	</select>
+	
+	<insert id="saveJinhuo" parameterType="pd">
+			insert into tb_jinhuo(
+				     sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 jinhuo_time
+			)values(
+					#{sp_id},
+					#{spmc_id},
+					#{ggxh},
+					#{danwei},
+					#{danjia},
+					#{shuliang},
+					#{money},
+					#{money_dx},
+					#{remark},
+					#{caozuoyuan},
+					#{jinhuo_time}
+			)
+	</insert>
+	
+	<update id="updateJinhuo" parameterType="pd">
+		update tb_jinhuo
+			set 
+				     spmc_id  = #{spmc_id},
+					 ggxh = #{ggxh},
+					 danwei = #{danwei},
+					 danjia = #{danjia},
+					 shuliang = #{shuliang},
+					 money = #{money},
+					 money_dx = #{money_dx},
+					 remark = #{remark},
+					 caozuoyuan=#{caozuoyuan}
+			where sp_id = #{sp_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+				     sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 jinhuo_time,
+					 goods_name
+		     from tb_jinhuo 
+		     left join tb_goods on goods_id = spmc_id
+		     where sp_id =#{sp_id}
+	</select>
+	
+	<delete id="deleteJinhuo" parameterType="pd">
+		delete from tb_jinhuo where sp_id = #{sp_id}
+	</delete>
+	
+	<select id="getDataToView" parameterType="pd" resultType="pd">
+			select 
+				     sp_id,
+					 spmc_id,
+					 ggxh,
+					 danwei,
+					 danjia,
+					 shuliang,
+					 money,
+					 money_dx,
+					 remark,
+					 caozuoyuan,
+					 jinhuo_time,
+					 goods_name
+		     from tb_jinhuo 
+		     left join tb_goods on goods_id = spmc_id
+		     where sp_id =#{sp_id}
+	
+	</select>
+		
+</mapper>

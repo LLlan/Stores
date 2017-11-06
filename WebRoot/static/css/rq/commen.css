@@ -1,0 +1,89 @@
+.weui-bar__item--on{
+    color:#40b55c;
+}
+.weui-bar__item--on>.iconfont{
+    color:#40b55c;
+}
+.weui-tabbar__item.weui-bar__item--on .weui-tabbar__label{
+    color:#40b55c;
+}
+.weui-tabbar__item>.iconfont{
+    font-size:22px;
+}
+.weui-tabbar__item{
+    position: relative;
+    padding:0;
+}
+.weui-tabbar__item>div{
+    width:100%;
+    text-align: center;
+    position: absolute;
+    left:0;
+    top:8px;
+}
+.weui-tabbar__item>p{
+    width:100%;
+    position: absolute;
+    bottom:3px;
+    left:0;
+}
+.weui-tabbar__label{
+    font-size:12px;
+    height:20px;
+    line-height:20px;
+}
+.mask{
+    width:100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:600;
+    background-color:rgba(0,0,0,0.2);
+}
+header{
+    width:100%;
+    height:56px;
+    background-color:#333;
+    position: fixed;
+    top:0;
+    left:0;
+}
+.header{
+    width:94%;
+    height:56px;
+    line-height: 56px;
+    margin:0 auto;
+    overflow: hidden;
+    font-size: 18px;
+    text-align: center;
+    color:#fff;
+    position: relative;
+}
+.back{
+    display:block;
+    height:30px;
+    line-height:30px;
+    color:#fff;
+    font-size:20px;
+    position: absolute;
+    top:13px;
+    left:0;
+    z-index: 200;
+}
+.back>span{
+    font-size:14px;
+}
+.header>h1{
+    width:100%;
+    position: absolute;
+    left:0;
+    top:0;
+}
+.weui-tabbar{
+    background-color:#fff;
+    height:49px;
+}
+.weui-tabbar__item>div{
+    top:2px;
+}

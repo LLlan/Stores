@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kucunMapper">
+		
+		
+	<select id="kucunlistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					  kucun_id,
+					  spmc_id,
+					  jinhuo_id,
+					  weight,
+					  goods_name
+				 from tb_kucun
+				 left join tb_goods on goods_id = spmc_id
+	</select>
+	
+	<insert id="saveKucun" parameterType="pd">
+			insert into tb_kucun(
+				  	  kucun_id,
+					  spmc_id,
+					  jinhuo_id,
+					  weight
+				)values(
+					#{kucun_id},
+					#{spmc_id},
+					#{jinhuo_id},
+					#{weight}
+				)
+	</insert>
+	
+	<!-- 查询该种商品是否存在库存 -->
+	<select id="selectkucunExist" parameterType="pd" resultType="pd">
+			select   
+					 kucun_id,
+					  spmc_id,
+					  jinhuo_id,
+					  weight
+			from tb_kucun 
+			where spmc_id = #{spmc_id}
+	</select>
+	
+	
+	
+	<update id="updatekucun" parameterType="pd">
+		update tb_kucun 
+		set
+			  weight =#{weight}
+			  
+		where 
+			  spmc_id = #{spmc_id}
+	</update>
+	
+	<!-- 根据货品id修改库存 -->
+	<update id="updatekucunByExist" parameterType="pd">
+		update tb_kucun 
+		set
+			  weight =#{weight}
+			  
+		where 
+			  spmc_id = #{spmc_id}
+			
+	</update>
+	
+	<select id="getKucunByspmcId" parameterType="pd" resultType="pd">
+			select   
+					  kucun_id,
+					  spmc_id,
+					  jinhuo_id,
+					  weight
+			from tb_kucun 
+			where spmc_id = #{spmc_id}
+	</select>
+	
+		
+</mapper>

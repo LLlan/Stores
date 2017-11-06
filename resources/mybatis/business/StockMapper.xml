@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stockMapper">
+		
+		 
+	<select id="stocklistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					  stock_id,
+					  stock_name,
+					  store_goods,
+					  stock_mianji
+				 from tb_stock
+	</select>
+	
+	<insert id="saveStock" parameterType="pd">
+			insert into tb_stock(
+				  stock_id,
+				  stock_name,
+				  store_goods,
+				  stock_mianji
+			)values(
+				#{stock_id},
+				#{stock_name},
+				#{store_goods},
+				#{stock_mianji}
+			)
+	</insert>
+	
+	<update id="updateStock" parameterType="pd">
+		update tb_stock
+			set 
+				  stock_name =#{stock_name},
+				  store_goods=#{store_goods},
+				  stock_mianji=#{stock_mianji}
+			where stock_id = #{stock_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+				  stock_id,
+				  stock_name,
+				  store_goods,
+				  stock_mianji
+		     from tb_stock 
+		     where stock_id =#{stock_id}
+	</select>
+	
+	<delete id="deleteStock" parameterType="pd">
+		delete from tb_stock where stock_id =#{stock_id}
+	</delete>
+		
+</mapper>

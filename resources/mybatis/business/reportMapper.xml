@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reportMapper">
+		
+		 
+	<select id="goodslistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					tg.goods_id,
+					tg.goods_name,
+					tg.linkman,
+					tg.manfacturer,
+					tg.phone
+				 from tb_goods tg
+				 
+	</select>
+	
+	<select id="goodshaveKucunlistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					tg.goods_id,
+					tg.goods_name,
+					tg.linkman,
+					tg.manfacturer,
+					tk.weight
+				 from tb_goods tg
+				 left join tb_kucun tk on tk.spmc_id = tg.goods_id
+				where tk.weight is not null
+	</select>
+	
+	<insert id="saveGoods" parameterType="pd">
+			insert into tb_goods(
+				goods_id,
+				goods_name,
+				linkman,
+				manfacturer,
+				phone
+			)values(
+				#{goods_id},
+				#{goods_name},
+				#{linkman},
+				#{manfacturer},
+				#{phone}
+			)
+	</insert>
+	
+	<update id="updateGoods" parameterType="pd">
+		update tb_goods
+			set 
+				goods_name = #{goods_name},
+				linkman = #{linkman},
+				manfacturer = #{manfacturer}
+		where goods_id = #{goodsId}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+					tg.goods_id,
+					tg.goods_name,
+					tg.linkman,
+					tg.manfacturer,
+					tg.phone
+		     from tb_goods tg
+		     where tg.goods_id =#{goodsId}
+	</select>
+	
+	<delete id="deleteGoods" parameterType="pd">
+		delete from tb_goods where goods_id =#{goodsId}
+	</delete>
+		
+</mapper>

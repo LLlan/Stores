@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="merchantMapper">
+		 
+		
+	<select id="MerChantlistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					merchant_id,
+					merchant_name,
+					address,
+					phone
+				 from tb_merchant 
+	</select>
+	
+	<insert id="saveMerChant" parameterType="pd">
+			insert into tb_merchant(
+				merchant_id,
+				merchant_name,
+				address,
+				phone
+			)values(
+				#{merchant_id},
+				#{merchant_name},
+				#{address},
+				#{phone}
+			)
+	</insert>
+	
+	<update id="updateMerChant" parameterType="pd">
+		update tb_merchant
+			set 
+				#{merchant_name} ={merchant_name},
+				#{address}={address},
+				#{phone}={phone}
+		where merchant_id = #{merchant_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+					merchant_id,
+					merchant_name,
+					address,
+					phone
+		     from tb_merchant 
+		     	where merchant_id = #{merchant_id}
+	</select>
+	
+	<delete id="deleteMerChant" parameterType="pd">
+		delete from tb_merchant where merchant_id = #{merchant_id}
+	</delete>
+		
+</mapper>

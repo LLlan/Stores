@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bankMapper">
+		
+		 
+	<select id="BanklistPage" parameterType="page" resultType="pd" useCache="false">
+				select 
+					bank_id,
+					bank_name,
+					card_number,
+					card_huming
+				 from tb_bank 
+	</select>
+	
+	<insert id="saveBank" parameterType="pd">
+			insert into tb_bank(
+					bank_id,
+					bank_name,
+					card_number,
+					card_huming
+			)values(
+					#{bank_id},
+					#{bank_name},
+					#{card_number},
+					#{card_huming}
+			)
+	</insert>
+	
+	<update id="updateBank" parameterType="pd">
+		update tb_bank
+			set 
+					bank_name =#{bank_name},
+					card_number=#{card_number},
+					card_huming=#{card_huming}
+			where bank_id = #{bank_id}
+	</update>
+	
+	<select id="getDataByID" parameterType="pd" resultType="pd">
+			select 
+					bank_id,
+					bank_name,
+					card_number,
+					card_huming
+		     from tb_bank 
+		     	where bank_id = #{bank_id}
+	</select>
+	
+	<delete id="deleteBank" parameterType="pd">
+		delete from tb_bank where bank_id = #{bank_id}
+	</delete>
+		
+</mapper>

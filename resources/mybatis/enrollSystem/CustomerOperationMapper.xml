@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customerOperationMapper">
+	<!-- 报名信息部分 -->
+	<!-- 1.前台 -->
+	<!-- 保存报名信息 -->
+	<insert id="saveEnrollInfo" parameterType="pd">
+		insert into tb_enroll_info(
+			enroll_info_id,
+			userName,
+			sex,
+			ID_number,
+			compayName,
+			tax_number,
+			contact_number,
+			company_detaile_address,
+			diploma_receive_method,
+			train_category_name,
+			addTime
+		)values(
+			#{enroll_info_id},
+			#{userName},
+			#{sex},
+			#{ID_number},
+			#{compayName},
+			#{tax_number},
+			#{contact_number},
+			#{company_detaile_address},
+			#{diploma_receive_method},
+			#{train_category_name},
+			#{addTime}
+		)
+	</insert>
+	
+	<!-- 根据身份证号以及培训工种获取报名信息 -->
+	<select id="getDataByIdcardAndTrainname" parameterType="pd" resultType="pd">
+		select 
+			*
+		from tb_enroll_info
+		where 
+			ID_number=#{ID_number} 
+			and train_category_name=#{train_category_name} 
+	</select>
+	
+	<!-- 根据身份证号获取报名信息 -->
+	<select id="getDataByIdcard" parameterType="pd" resultType="pd">
+		SELECT
+			tei.userName,
+			tei.sex,
+			tei.compayName,
+			tei.train_category_name,
+			IFNULL(tei.diploma_number,"")diploma_number,
+			IFNULL(tt1.subjects,"")subjects,
+			IFNULL(tt1.scores,"")scores
+		FROM
+			tb_enroll_info tei
+		LEFT JOIN (
+			SELECT
+				tmi.enroll_info_fid,
+				GROUP_CONCAT(tmi.`subject`) subjects,
+				GROUP_CONCAT(tmi.score) scores
+			FROM tb_mark_info tmi
+			GROUP BY tmi.enroll_info_fid
+		)tt1 ON tt1.enroll_info_fid=tei.enroll_info_id
+		WHERE
+			ID_number=#{ID_number} 
+	</select>
+	<!-- 2.后台 -->
+	<!--  
+		获取所有的信息
+	-->
+	<select id="getEnrollInfolistPage" parameterType="page" resultType="pd">
+		SELECT 
+			*
+		FROM tb_enroll_info
+		<where> 1=1
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		and (userName LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or ID_number LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or contact_number LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%'))
+		 	</if>
+		</where>
+		order by addTime asc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 咨询服务部分 -->
+	<!-- 1.前台 -->
+	<!-- 保存咨询服务信息 -->
+	<insert id="saveConsultService" parameterType="pd">
+		insert into tb_consult_service(
+			consult_service_id,
+			consult_person_name,
+			contact_number,
+			content,
+			consult_time,
+			status
+		)values(
+			#{consult_service_id},
+			#{consult_person_name},
+			#{contact_number},
+			#{content},
+			#{consult_time},
+			#{status}
+		)
+	</insert>
+	<!-- 2.后台 -->
+	<!--  
+		获取所有的信息
+	-->
+	<select id="getConsultServicelistPage" parameterType="page" resultType="pd">
+		SELECT 
+			*
+		FROM tb_consult_service
+		<where> 1=1
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		and (consult_person_name LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or contact_number LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or content LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%'))
+		 	</if>
+			<if test="pd.status!=null and pd.status!=''">
+		 		and status=#{pd.status}
+		 	</if>
+		</where>
+		order by status asc
+	</select>
+</mapper>

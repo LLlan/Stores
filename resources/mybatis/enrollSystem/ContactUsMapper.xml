@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="contactUsMapper">
+
+	<!--  
+		获取所有的信息
+	-->
+	<select id="contactUslistPage" parameterType="page" resultType="pd">
+		SELECT 
+			*
+		FROM sys_contact_us
+		<!-- <where>
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		tg.labelName LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or tg.type LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 	</if>
+		</where>  -->
+		order by sort asc
+	</select>
+	
+	<!--  
+		添加信息
+	-->
+	<insert id="insert" parameterType="pd">
+		INSERT INTO sys_contact_us(
+			contact_us_id,
+			title,
+			content,
+			sort
+		)VALUES(
+			#{contact_us_id},
+			#{title},
+			#{content},
+			#{sort}
+		)
+	</insert>
+
+	<!--  
+		根据主键ID获取对象信息
+	-->
+	<select id="getDateById" parameterType="pd" resultType="pd">
+		SELECT
+			*
+		FROM
+			sys_contact_us 
+		<where>
+			contact_us_id=#{contact_us_id}
+		</where>
+	</select>
+	
+	<!--  
+		修改指定信息
+	-->
+	<update id="update" parameterType="pd">
+		update sys_contact_us
+		set
+			title=#{title},
+			content=#{content},
+			sort=#{sort}
+		where 
+			contact_us_id=#{contact_us_id}
+	</update>
+	
+	<!--  
+		删除操作
+	-->
+	<delete id="delete" parameterType="pd">
+		delete 
+		from sys_contact_us
+		where contact_us_id in
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--  
+		获取所有的信息
+	-->
+	<select id="contactUsList" parameterType="pd" resultType="pd">
+		SELECT 
+			*
+		FROM sys_contact_us
+		<!-- <where>
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		tg.labelName LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or tg.type LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 	</if>
+		</where>  -->
+		order by sort asc
+	</select>
+	<!--  
+		获取指定id集合的数据
+	-->
+	<!-- <select id="getListByIds" parameterType="pd" resultType="pd">
+		select 
+			img_path
+		from sys_main_img
+		where main_img_id in
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select> -->
+	
+	<!-- 删除图片路径-->
+	<!-- <update id="deleteImgPath" parameterType="pd">
+		update  sys_main_img
+		set 
+			img_path = ''
+		where 
+			main_img_id=#{main_img_id}
+	</update> -->
+	
+	<!--  
+		获取指定条件下的所有主图信息
+	-->
+	<!-- <select id="getListByCondition" parameterType="pd" resultType="pd">
+		select 
+			img_path
+		from sys_main_img
+		where 
+			type=#{type} and status=#{status}
+	</select> -->
+</mapper>

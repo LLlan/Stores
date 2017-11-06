@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newsDetailesMapper">
+
+	<!--  
+		获取所有的信息
+	-->
+	<select id="getlistPage" parameterType="page" resultType="pd">
+		SELECT
+			snd.news_detailes_id,
+			snd.title,
+			snd.content,
+			snd.publish_time,
+			snm.news_module_name,
+			snd.news_module_fid
+		FROM
+			sys_news_detailes snd
+		LEFT JOIN sys_news_module snm ON snm.news_module_id = snd.news_module_fid
+		<!-- <where>
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		tg.labelName LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or tg.type LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 	</if>
+		</where>  -->
+		ORDER BY
+			snd.news_module_fid,snd.publish_time desc
+	</select>
+	
+	<!--  
+		获取所有的信息
+	-->
+	<select id="getList" parameterType="pd" resultType="pd">
+		SELECT 
+			*
+		FROM sys_news_detailes
+		where 
+			news_module_fid=#{news_module_fid}
+		<!-- <where>
+			<if test="pd.searchName!=null and pd.searchName!=''">
+		 		tg.labelName LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 		or tg.type LIKE CONCAT(CONCAT('%', #{pd.searchName}),'%')
+		 	</if>
+		</where>  -->
+		order by 
+			publish_time desc
+	</select>
+	<!--  
+		添加信息
+	-->
+	<insert id="insert" parameterType="pd">
+		INSERT INTO sys_news_detailes(
+			news_detailes_id,
+			title,
+			content,
+			publish_time,
+			news_module_fid
+		)VALUES(
+			#{news_detailes_id},
+			#{title},
+			#{content},
+			#{publish_time},
+			#{news_module_fid}
+		)
+	</insert>
+
+	<!--  
+		根据主键ID获取对象信息
+	-->
+	<select id="getDateById" parameterType="pd" resultType="pd">
+		SELECT
+			*
+		FROM
+			sys_news_detailes 
+		<where>
+			news_detailes_id=#{news_detailes_id}
+		</where>
+	</select>
+	
+	<!--  
+		修改指定信息
+	-->
+	<update id="update" parameterType="pd">
+		update sys_news_detailes
+		set
+			title=#{title},
+			content=#{content},
+			publish_time=#{publish_time},
+			news_module_fid=#{news_module_fid}
+		where 
+			news_detailes_id=#{news_detailes_id}
+	</update>
+	
+	<!--  
+		删除操作
+	-->
+	<delete id="delete" parameterType="pd">
+		delete 
+		from sys_news_detailes
+		where news_detailes_id in
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--  
+		获取指定id集合的数据
+	-->
+	<!-- <select id="getListByIds" parameterType="pd" resultType="pd">
+		select 
+			icon_path
+		from sys_news_module
+		where news_module_id in
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select> -->
+	
+	<!-- 删除图片路径-->
+	<!-- <update id="deleteImgPath" parameterType="pd">
+		update sys_news_module
+		set 
+			icon_path = ''
+		where 
+			news_module_id=#{news_module_id}
+	</update> -->
+	
+	<!--  
+		获取指定条件下的所有主图信息
+	-->
+	<!-- <select id="getListByCondition" parameterType="pd" resultType="pd">
+		select 
+			icon_path,
+			news_module_name
+		from sys_news_module
+		where 
+			status=#{status}
+	</select> -->
+	
+	
+</mapper>

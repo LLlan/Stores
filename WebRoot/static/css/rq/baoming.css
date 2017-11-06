@@ -1,0 +1,69 @@
+.sing{
+  width: 100%;
+  padding: 0 3%;
+  overflow: hidden;
+
+}
+.sing_a{
+  width: 100%;
+  padding: 10px 3%;
+  height: 50px;
+  line-height: 30px;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-top: 10px;
+  background-color: #F7F7F7;
+}
+.sing_a label{
+  color: #333;
+  float: left;
+}
+.sing_a input{
+  width: 80%;
+  background-color: #F7F7F7;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+}
+.sing_a input#tax_number{
+  width: 60%;
+}
+select option{
+  color: #000;
+}
+.instantly{
+    width: 100%;
+   padding: 0 3%;
+   height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 30px auto;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #5B8CC7;
+}
+.zq{
+  margin-left: 20px;
+  float: left;
+  font-size: 15px;
+}
+
+.zq i.icon-dagou{
+  font-size: 15px;
+  color: #58BC4C;
+}
+.zq i.icon-yuanquan{
+  font-size: 15px;
+  color: #ddd;
+}
+#textarea{
+  resize: none;
+  width: 100%;
+  padding: 10px;
+  height: 150px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  background-color: #F7F7F7;
+
+}
